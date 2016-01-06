@@ -14,7 +14,7 @@
             questions you might have about this property. Fill out the form below
             with your contact information, and an agent will reach out soon.
         </p>
-        @using (Html.BeginForm())
+        @using (Html.BeginForm("Create", "Notifications"))
         {
             @Html.HiddenFor(m => m.HouseTitle)
             <div class="form-group">
