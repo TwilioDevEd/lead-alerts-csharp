@@ -1,6 +1,7 @@
 ﻿using System.Web.Mvc;
 using LeadAlerts.Web.Domain;
 using LeadAlerts.Web.ViewModels;
+using Vereyon.Web;
 
 namespace LeadAlerts.Web.Controllers
 {
@@ -20,7 +21,15 @@ namespace LeadAlerts.Web.Controllers
         [HttpPost]
         public ActionResult Create(Lead lead)
         {
-            _messageSender.Send(FormatMessage(lead));
+            var message = _messageSender.Send(FormatMessage(lead));
+            if (message.RestException == null)
+            {
+                FlashMessage.Confirmation("Thanks! An agent will be contacting you shortly.");
+            }
+            else
+            {
+                FlashMessage.Danger("Oops! There was an error. Please try again.");
+            }
 
             return RedirectToAction("Index", "Home");
         }
