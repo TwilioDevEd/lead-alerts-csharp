@@ -7,7 +7,7 @@ namespace LeadAlerts.Web.Tests.Controllers
     public class HomeControllerTest
     {
         [Test]
-        public void GivenACreateAction_ThenRendersDefaultView()
+        public void GivenAIndexAction_ThenRendersDefaultView()
         {
             var controller = new HomeController();
 
