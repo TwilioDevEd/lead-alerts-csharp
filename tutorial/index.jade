@@ -1,7 +1,8 @@
 .chapter(data-title='Setting Up The Application')
   .step(
     data-title='What Are We Building?',
-    data-file='LeadAlerts.Web/Views/Home/Index.cshtml')
+    data-file='LeadAlerts.Web/Views/Home/Index.cshtml',
+    data-mode='xml')
     :markdown
       ## What Are We Building?
 
@@ -25,3 +26,121 @@
 
       **See Also:**
       * [Sales Lead](//www.investopedia.com/terms/s/sales-lead.asp)
+
+  .step(data-title='How It Works')
+    :markdown
+      ## How It Works
+
+      Here's how our example app works at a high level:
+
+      ![Lead Alerts Flow](//s3.amazonaws.com/howtodocs/lead-alerts-flow.png)
+
+      1. Your customer arrives at a landing page for your product (in this case,
+         a house).
+      1. The customer enters their name and contact information into a form to
+         request more information.
+      1. The sales rep responsible for the product (in this case a _real estate
+         agent_) receives a text message notifying them of the new lead.
+
+  .step(
+    data-title='Landing Page Data', 
+    data-file='LeadAlerts.Web/Controllers/HomeController.cs')
+    :markdown
+      ## Landing Page Data
+
+      To display a landing page for our house, we'll first need some data about
+      the fictional house we've put on the market. For demonstration purposes,
+      we've hard-coded a ruby hash containing information we need.
+
+      ---
+
+      **See Also:**
+      * [Controllers and Action Methods](//bit.ly/22KGGHr)
+      * [ViewBag](//bit.ly/1MSV8Br)
+
+  .step(data-title='Rendering the Landing Page', 
+    data-file='LeadAlerts.Web/Views/Home/Index.cshtml')
+    :markdown
+      ## Rendering the Landing Page
+
+      In our razor template, we insert data about the house, and in a sidebar
+      include a form for the user to enter in their contact information to
+      request more info about the home.
+
+      ---
+
+      **See Also:**
+      * [Razor Engine](//razorengine.codeplex.com/)
+
+  .step(
+    data-title='Creating a Twilio REST API Client', 
+    data-file='LeadAlerts.Web/Domain/MessageSender.cs')
+    :markdown
+      ## Creating a Twilio REST API Client
+
+      When our application is started, we create an authenticated _Twilio REST
+      API client_ that we can use across all requests to our controller. We
+      initialize it with our _Twilio Account Credentials_ stored in our
+      _Local.config_ file.
+
+      `Credentials` and `PhoneNumbers` are just a thin wrapper for reading the
+      values from `Local.config` something like:
+
+      ```javascript
+      public static string AccountSID
+      {
+          get
+          {
+              return
+                WebConfigurationManager.AppSettings["TwilioAccountSid"];
+          }
+      }
+      ```
+
+      ---
+
+      **See Also:**
+      * [Twilio SMS and MMS Quickstart](//www.twilio.com/docs/quickstart/csharp/sms/sending-via-rest)
+
+  .step(
+    data-title='Handling the POST Request', 
+    data-file='LeadAlerts.Web/Controllers/NotificationsController.cs')
+    :markdown
+      ## Handling the POST Request
+
+      This code handles the HTTP `POST` request issued by our landing page, and
+      uses our `MessageSender` to send a SMS message to the real estate agent's
+      phone number, which is also set as a environment variable. We include the lead's name, phone number, and inquiry directly in the body of the text message we send to the agent.
+
+      Now the agent has all the information they need to immediately follow up on the lead.
+
+      ---
+
+      **See Also:**
+      * [The Twilio C# Helper Library](//www.twilio.com/docs/csharp/install)
+
+  .step
+    :markdown
+      ## Where to next?
+
+      That's it! We've just implemented an application to instantly route leads
+      to sales reps (in a real estate scenario) using text messages. If you're a
+      .NET developer working with Twilio, you might want to check out these
+      other tutorials.
+
+      [**Browser Calls**](//www.twilio.com/docs/tutorials/walkthrough/browser-calls/csharp/mvc)
+
+      Twilio Client allows your users to make and receive phone calls in their
+      browsers
+
+      [**Call Tracking**](https://www.twilio.com/docs/tutorials/walkthrough/call-tracking/csharp/mvc)
+
+      Call Tracking helps you measure the effectiveness of different marketing
+      campaigns.
+
+      ### Did this help?
+
+      Thanks for checking out this tutorial! If you have any feedback
+      to share with us, we'd love to hear it. Tweet
+      [@twilio](//twitter.com/twilio) to let us know what you
+      think.
