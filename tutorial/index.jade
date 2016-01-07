@@ -7,40 +7,19 @@
       ## What Are We Building?
 
       You probably already have landing pages or product detail views in your
-      web application, which you're using to generate leads for your sales
-      force. In this tutorial, we'll use Twilio SMS to send your sales folks
-      text messages right when a new lead comes in.
+      web application, which you're using to generate leads for your business. 
+      In this tutorial, we'll use Twilio SMS to send a message when a new lead
+      is found.
+
+      ![Lead Alerts Flow](//s3.amazonaws.com/howtodocs/lead-alerts-flow.png)
 
       In this example we'll be implementing instant lead alerts for real estate
       (much like [our awesome friends at
       Trulia](//www.twilio.com/customers/stories/trulia)). We'll create a
       landing page for a new house on the market, and notify a real estate agent
-      the moment a potential customer requests information. If you're not in
-      real estate, don't worry - the same technique can be used for any business
-      that needs to distribute leads to sales people.
+      the moment a potential customer requests information. 
 
-      Want to learn how it works? Then let's build it! Click the next arrow
-      above to continue the tutorial.
-
-      ---
-
-      **See Also:**
-      * [Sales Lead](//www.investopedia.com/terms/s/sales-lead.asp)
-
-  .step(data-title='How It Works')
-    :markdown
-      ## How It Works
-
-      Here's how our example app works at a high level:
-
-      ![Lead Alerts Flow](//s3.amazonaws.com/howtodocs/lead-alerts-flow.png)
-
-      1. Your customer arrives at a landing page for your product (in this case,
-         a house).
-      1. The customer enters their name and contact information into a form to
-         request more information.
-      1. The sales rep responsible for the product (in this case a _real estate
-         agent_) receives a text message notifying them of the new lead.
+      Let's see how it works! Click the next arrow above to continue the tutorial.
 
   .step(
     data-title='Landing Page Data', 
@@ -50,7 +29,7 @@
 
       To display a landing page for our house, we'll first need some data about
       the fictional house we've put on the market. For demonstration purposes,
-      we've hard-coded a ruby hash containing information we need.
+      we've hard-coded the information we need.
 
       ---
 
@@ -78,10 +57,10 @@
     :markdown
       ## Creating a Twilio REST API Client
 
-      When our application is started, we create an authenticated _Twilio REST
-      API client_ that we can use across all requests to our controller. We
-      initialize it with our _Twilio Account Credentials_ stored in our
-      _Local.config_ file.
+      Here we create a helper class with an authenticated Twilio REST
+      API client that we can use anytime we need to send a text message. We
+      initialize it with our [Twilio Account Credentials](//www.twilio.com/user/account/messaging/dashboard)
+      stored in our _Local.config_ file.
 
       `Credentials` and `PhoneNumbers` are just a thin wrapper for reading the
       values from `Local.config` something like:
@@ -108,11 +87,14 @@
     :markdown
       ## Handling the POST Request
 
-      This code handles the HTTP `POST` request issued by our landing page, and
-      uses our `MessageSender` to send a SMS message to the real estate agent's
-      phone number, which is also set as a environment variable. We include the lead's name, phone number, and inquiry directly in the body of the text message we send to the agent.
+      This code handles the HTTP `POST` request issued by our landing page. It
+      uses our `MessageSender` class to send a SMS message to the real estate
+      agent's phone number, which is also set as a environment variable. We
+      include the lead's name, phone number, and inquiry directly in the body of
+      the text message we send to the agent.
 
-      Now the agent has all the information they need to immediately follow up on the lead.
+      Now the agent has all the information they need to immediately follow up
+      on the lead.
 
       ---
 
