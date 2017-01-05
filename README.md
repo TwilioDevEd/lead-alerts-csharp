@@ -1,3 +1,7 @@
+<a href="https://www.twilio.com">
+  <img src="https://static0.twilio.com/marketing/bundles/marketing/img/logos/wordmark-red.svg" alt="Twilio" width="250" />
+</a>
+
 # Instant Lead Alerts for C# and ASP.NET MVC
 
 This demo application shows how to implement instant lead alerts using C# and ASP.NET MVC. Notify sales reps or agents right away when a new lead comes in for a real estate listing or other high value channel.
@@ -9,7 +13,7 @@ This demo application shows how to implement instant lead alerts using C# and AS
 ## Local Development
 
 1. Clone this repository and `cd` into its directory:
-   ```
+   ```bash
    git clone git@github.com:TwilioDevEd/lead-alerts-csharp.git
    cd lead-alerts-csharp
    ```
@@ -28,7 +32,7 @@ This demo application shows how to implement instant lead alerts using C# and AS
 
 1. Run the application.
 
-1. Check it out at [http://localhost:3000](http://localhost:3000)
+1. Check it out at [http://localhost:1547](http://localhost:1547)
 
 That's it!
 
