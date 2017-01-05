@@ -1,28 +1,21 @@
 ﻿using Twilio;
+using Twilio.Types;
+using Twilio.Rest.Api.V2010.Account;
+using System.Threading.Tasks;
 
 namespace LeadAlerts.Web.Domain
 {
-    public interface IMessageSender
+    public class MessageSender
     {
-        Message Send(string message);
-    }
-
-    public class MessageSender : IMessageSender
-    {
-        private readonly TwilioRestClient _client;
-
-        public MessageSender() : this(
-            new TwilioRestClient(Credentials.AccountSID, Credentials.AuthToken)) { }
-
-
-        public MessageSender(TwilioRestClient client)
-        {
-            _client = client;
+        public MessageSender() {
+            TwilioClient.Init(Credentials.AccountSID, Credentials.AuthToken);
         }
 
-        public Message Send(string message)
+        public async Task<MessageResource> SendAsync(string messageStr)
         {
-            return _client.SendMessage(PhoneNumbers.Twilio, PhoneNumbers.Agent, message);
+            return await MessageResource.CreateAsync(
+                new PhoneNumber(PhoneNumbers.Twilio),
+                from: new PhoneNumber(PhoneNumbers.Agent), body: messageStr);
         }
     }
 }

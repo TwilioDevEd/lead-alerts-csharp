@@ -2,27 +2,25 @@
 using LeadAlerts.Web.Domain;
 using LeadAlerts.Web.ViewModels;
 using Vereyon.Web;
+using System.Threading.Tasks;
 
 namespace LeadAlerts.Web.Controllers
 {
     public class NotificationsController : Controller
     {
-        private readonly IMessageSender _messageSender;
+        private readonly MessageSender _messageSender;
 
-        public NotificationsController() : this(
-            new MessageSender()) { }
-
-        public NotificationsController(IMessageSender messageSender)
-        {
-            _messageSender = messageSender;
+        public NotificationsController() {
+            _messageSender = new MessageSender();
         }
-
+        
         // POST: Notifications/Create
         [HttpPost]
-        public ActionResult Create(Lead lead)
+        public async Task<ActionResult> Create(Lead lead)
         {
-            var message = _messageSender.Send(FormatMessage(lead));
-            if (message.RestException == null)
+            var message = await _messageSender.SendAsync(FormatMessage(lead));
+
+            if (message.ErrorCode == null)
             {
                 FlashMessage.Confirmation("Thanks! An agent will be contacting you shortly.");
             }
