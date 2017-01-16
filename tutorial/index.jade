@@ -52,8 +52,9 @@
       * [Razor Engine](//razorengine.codeplex.com/)
 
   .step(
-    data-title='Creating a Twilio REST API Client', 
-    data-file='LeadAlerts.Web/Domain/MessageSender.cs')
+    data-title='Initializing the Twilio REST API Client',
+    data-file='LeadAlerts.Web/Domain/MessageSender.cs'
+    data-highlight='9-12')
     :markdown
       ## Creating a Twilio REST API Client
 
@@ -62,22 +63,22 @@
       initialize it with our [Twilio Account Credentials](//www.twilio.com/user/account/messaging/dashboard)
       stored in our _Local.config_ file.
 
-      `Credentials` and `PhoneNumbers` are just a thin wrapper for reading the
-      values from `Local.config` something like:
-
-      ```javascript
-      public static string AccountSID
-      {
-          get
-          {
-              return
-                WebConfigurationManager.AppSettings["TwilioAccountSid"];
-          }
-      }
-      ```
-
       ---
 
+      **See Also:**
+      * [Twilio SMS and MMS Quickstart](//www.twilio.com/docs/quickstart/csharp/sms/sending-via-rest)
+
+  .step(
+    data-title='Sending the Message',
+    data-file='LeadAlerts.Web/Domain/MessageSender.cs'
+    data-highlight='22-30')
+    :markdown
+      ## Sending the Message
+
+      `SendAsync` is a wrapper that makes use of the `MessageResource` to
+       `CreateAsync` a message. Notice that it is not necessary to specify a client here.
+
+      ---
       **See Also:**
       * [Twilio SMS and MMS Quickstart](//www.twilio.com/docs/quickstart/csharp/sms/sending-via-rest)
 
