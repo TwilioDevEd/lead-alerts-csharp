@@ -12,7 +12,7 @@ namespace LeadAlerts.Web.Tests.Controllers
             var controller = new HomeController();
 
             controller.WithCallTo(c => c.Index())
-                .ShouldRenderView("Index");
+                .ShouldRenderDefaultView();
         }
     }
 }

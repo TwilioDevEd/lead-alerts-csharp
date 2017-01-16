@@ -6,14 +6,12 @@ namespace LeadAlerts.Web.Domain
     {
         public static string AccountSID
         {
-            get { return WebConfigurationManager.AppSettings["TwilioAccountSid"] ??
-                    "ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"; }
+            get { return WebConfigurationManager.AppSettings["TwilioAccountSid"]; }
         }
 
         public static string AuthToken
         {
-            get { return WebConfigurationManager.AppSettings["TwilioAuthToken"] ?? 
-                    "aXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"; }
+            get { return WebConfigurationManager.AppSettings["TwilioAuthToken"]; }
         }
     }
 
