@@ -5,7 +5,12 @@ using System.Threading.Tasks;
 
 namespace LeadAlerts.Web.Domain
 {
-    public class MessageSender
+    public interface IMessageSender
+    {
+        Task<MessageResource> SendAsync(string messageStr); 
+    }
+
+    public class MessageSender: IMessageSender
     {
         public MessageSender() {
             TwilioClient.Init(Credentials.AccountSID, Credentials.AuthToken);
@@ -15,7 +20,9 @@ namespace LeadAlerts.Web.Domain
         {
             return await MessageResource.CreateAsync(
                 new PhoneNumber(PhoneNumbers.Twilio),
-                from: new PhoneNumber(PhoneNumbers.Agent), body: messageStr);
+                from: new PhoneNumber(PhoneNumbers.Agent),
+                body: messageStr
+            );
         }
     }
 }

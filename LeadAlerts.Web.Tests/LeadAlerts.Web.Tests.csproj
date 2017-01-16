@@ -109,7 +109,6 @@
   <ItemGroup>
     <Compile Include="Controllers\HomeControllerTest.cs" />
     <Compile Include="Controllers\NotificationsControllerTest.cs" />
-    <Compile Include="Domain\MessageSenderTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

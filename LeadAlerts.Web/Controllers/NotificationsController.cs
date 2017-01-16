@@ -8,10 +8,13 @@ namespace LeadAlerts.Web.Controllers
 {
     public class NotificationsController : Controller
     {
-        private readonly MessageSender _messageSender;
+        private readonly IMessageSender _messageSender;
 
-        public NotificationsController() {
-            _messageSender = new MessageSender();
+        public NotificationsController() : this(new MessageSender()) { }
+
+        public NotificationsController(IMessageSender messageSender)
+        {
+            _messageSender = messageSender;
         }
         
         // POST: Notifications/Create
@@ -34,9 +37,7 @@ namespace LeadAlerts.Web.Controllers
 
         private static string FormatMessage(Lead lead)
         {
-            return string.Format(
-                "New lead received for {0}. Call {1} at {2}. Message: {3}",
-                lead.HouseTitle, lead.Name, lead.Phone, lead.Message);
+            return $"New lead received for {lead.HouseTitle}. Call {lead.Name} at {lead.Phone}. Message: {lead.Message}";
         }
     }
 }
