@@ -6,6 +6,9 @@ using Moq;
 using NUnit.Framework;
 using TestStack.FluentMVCTesting;
 using Twilio;
+using Twilio.Clients;
+using Twilio.Http;
+using Twilio.Rest.Api.V2010.Account;
 
 namespace LeadAlerts.Web.Tests.Controllers
 {
@@ -18,14 +21,18 @@ namespace LeadAlerts.Web.Tests.Controllers
                 new HttpRequest(null, "http://tempuri.org", null),
                 new HttpResponse(null));
 
-            var mockMessageSender = new Mock<IMessageSender>();
-            mockMessageSender.Setup(ms => ms.Send(It.IsAny<string>())).Returns(new Message());
-            var controller = new NotificationsController(mockMessageSender.Object);
+            var messageSenderMock = new Mock<IMessageSender>();
+
+            messageSenderMock.Setup(m => m.SendAsync(It.IsAny<string>()))
+                .ReturnsAsync(MessageResource.FromJson("{}"));
+
+            var controller = new NotificationsController(messageSenderMock.Object);
 
             controller.WithCallTo(c => c.Create(new Lead()))
-                .ShouldRedirectTo<HomeController>(home => home.Index());
+                .ShouldRedirectToRoute("");
 
-            mockMessageSender.Verify(c => c.Send(It.IsAny<string>()), Times.Once);
+            messageSenderMock.Verify(
+                c => c.SendAsync(It.IsAny<string>()), Times.Once);
         }
     }
 }

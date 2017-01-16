@@ -2,6 +2,7 @@
 using LeadAlerts.Web.Domain;
 using LeadAlerts.Web.ViewModels;
 using Vereyon.Web;
+using System.Threading.Tasks;
 
 namespace LeadAlerts.Web.Controllers
 {
@@ -9,20 +10,20 @@ namespace LeadAlerts.Web.Controllers
     {
         private readonly IMessageSender _messageSender;
 
-        public NotificationsController() : this(
-            new MessageSender()) { }
+        public NotificationsController() : this(new MessageSender()) { }
 
         public NotificationsController(IMessageSender messageSender)
         {
             _messageSender = messageSender;
         }
-
+        
         // POST: Notifications/Create
         [HttpPost]
-        public ActionResult Create(Lead lead)
+        public async Task<ActionResult> Create(Lead lead)
         {
-            var message = _messageSender.Send(FormatMessage(lead));
-            if (message.RestException == null)
+            var message = await _messageSender.SendAsync(FormatMessage(lead));
+
+            if (message.ErrorCode == null)
             {
                 FlashMessage.Confirmation("Thanks! An agent will be contacting you shortly.");
             }
@@ -36,9 +37,7 @@ namespace LeadAlerts.Web.Controllers
 
         private static string FormatMessage(Lead lead)
         {
-            return string.Format(
-                "New lead received for {0}. Call {1} at {2}. Message: {3}",
-                lead.HouseTitle, lead.Name, lead.Phone, lead.Message);
+            return $"New lead received for {lead.HouseTitle}. Call {lead.Name} at {lead.Phone}. Message: {lead.Message}";
         }
     }
 }

@@ -52,8 +52,9 @@
       * [Razor Engine](//razorengine.codeplex.com/)
 
   .step(
-    data-title='Creating a Twilio REST API Client', 
-    data-file='LeadAlerts.Web/Domain/MessageSender.cs')
+    data-title='Initializing the Twilio REST API Client',
+    data-file='LeadAlerts.Web/Domain/MessageSender.cs'
+    data-highlight='10-12')
     :markdown
       ## Creating a Twilio REST API Client
 
@@ -78,6 +79,20 @@
 
       ---
 
+      **See Also:**
+      * [Twilio SMS and MMS Quickstart](//www.twilio.com/docs/quickstart/csharp/sms/sending-via-rest)
+
+  .step(
+    data-title='Sending the Message',
+    data-file='LeadAlerts.Web/Domain/MessageSender.cs'
+    data-highlight='22-30')
+    :markdown
+      ## Sending the Message
+
+      `SendAsync` is a wrapper that makes use of the `MessageResource` to
+       `Create` a message. Notice that it is not necessary to specify a client here.
+
+      ---
       **See Also:**
       * [Twilio SMS and MMS Quickstart](//www.twilio.com/docs/quickstart/csharp/sms/sending-via-rest)
 
