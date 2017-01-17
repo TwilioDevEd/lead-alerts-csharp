@@ -16,7 +16,7 @@ namespace LeadAlerts.Web.Controllers
         {
             _messageSender = messageSender;
         }
-        
+
         // POST: Notifications/Create
         [HttpPost]
         public async Task<ActionResult> Create(Lead lead)
