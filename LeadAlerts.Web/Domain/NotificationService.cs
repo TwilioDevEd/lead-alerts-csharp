@@ -5,26 +5,27 @@ using Twilio.Clients;
 
 namespace LeadAlerts.Web.Domain
 {
-    public interface IMessageSender
+    public interface INotificationService
     {
         Task<MessageResource> SendAsync(string message);
     }
 
-    public class MessageSender: IMessageSender
+    public class NotificationService: INotificationService
     {
-        private readonly TwilioRestClient _twilioRestClient;
+        private readonly TwilioRestClient _client;
 
-        public MessageSender() {
-            _twilioRestClient = new TwilioRestClient(Credentials.AccountSID, Credentials.AuthToken);
+        public NotificationService() {
+            _client = new TwilioRestClient(Credentials.AccountSID, Credentials.AuthToken);
         }
 
         public async Task<MessageResource> SendAsync(string message)
         {
+            var to = new PhoneNumber(PhoneNumbers.Twilio);
             return await MessageResource.CreateAsync(
-                new PhoneNumber(PhoneNumbers.Twilio),
+                to,
                 from: new PhoneNumber(PhoneNumbers.Agent),
                 body: message,
-                client: _twilioRestClient
+                client: _client
             );
         }
     }

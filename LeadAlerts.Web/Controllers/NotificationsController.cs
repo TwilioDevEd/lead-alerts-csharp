@@ -8,28 +8,28 @@ namespace LeadAlerts.Web.Controllers
 {
     public class NotificationsController : Controller
     {
-        private readonly IMessageSender _messageSender;
+        private readonly INotificationService _notificationService;
 
-        public NotificationsController() : this(new MessageSender()) { }
+        public NotificationsController() : this(new NotificationService()) { }
 
-        public NotificationsController(IMessageSender messageSender)
+        public NotificationsController(INotificationService notificationService)
         {
-            _messageSender = messageSender;
+            _notificationService = notificationService;
         }
 
         // POST: Notifications/Create
         [HttpPost]
         public async Task<ActionResult> Create(Lead lead)
         {
-            var message = await _messageSender.SendAsync(FormatMessage(lead));
+            var message = await _notificationService.SendAsync(FormatMessage(lead));
 
-            if (message.ErrorCode == null)
+            if (message.ErrorCode.HasValue)
             {
-                FlashMessage.Confirmation("Thanks! An agent will be contacting you shortly.");
+                FlashMessage.Danger("Oops! There was an error. Please try again.");
             }
             else
             {
-                FlashMessage.Danger("Oops! There was an error. Please try again.");
+                FlashMessage.Confirmation("Thanks! An agent will be contacting you shortly.");
             }
 
             return RedirectToAction("Index", "Home");

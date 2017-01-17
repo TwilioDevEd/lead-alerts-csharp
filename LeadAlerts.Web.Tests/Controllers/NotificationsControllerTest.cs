@@ -14,21 +14,32 @@ namespace LeadAlerts.Web.Tests.Controllers
         [Test]
         public void GivenACreateAction_ThenItSendsAMessage()
         {
-            var messageSenderMock = new Mock<IMessageSender>();
+            var notificationServiceMock = new Mock<INotificationService>();
 
-            messageSenderMock.Setup(m => m.SendAsync(It.IsAny<string>()))
+            notificationServiceMock
+                .Setup(m => m.SendAsync(It.IsAny<string>()))
                 .ReturnsAsync(MessageResource.FromJson("{}"));
 
             HttpContext.Current = new HttpContext(
                 new HttpRequest(null, "http://tempuri.org", null),
                 new HttpResponse(null));
-            var controller = new NotificationsController(messageSenderMock.Object);
+            var controller = new NotificationsController(notificationServiceMock.Object);
 
+            var lead = new Lead
+            {
+                HouseTitle = "La Maison",
+                Name = "Alice",
+                Phone = "555-5555",
+                Message = "Welcome back!"
+            };
             controller
-                .WithCallTo(c => c.Create(new Lead()))
+                .WithCallTo(c => c.Create(lead))
                 .ShouldRedirectTo<HomeController>(c => c.Index());
 
-            messageSenderMock.Verify(c => c.SendAsync(It.IsAny<string>()), Times.Once);
+
+            const string message = "New lead received for La Maison. " +
+                                   "Call Alice at 555-5555. Message: Welcome back!";
+            notificationServiceMock.Verify(c => c.SendAsync(message), Times.Once);
         }
     }
 }

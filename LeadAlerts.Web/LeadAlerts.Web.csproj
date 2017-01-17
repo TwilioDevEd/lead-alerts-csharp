@@ -132,7 +132,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NotificationsController.cs" />
     <Compile Include="Domain\Configuration.cs" />
-    <Compile Include="Domain\MessageSender.cs" />
+    <Compile Include="Domain\NotificationService.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
