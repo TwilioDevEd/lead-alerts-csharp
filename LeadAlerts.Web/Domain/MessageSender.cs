@@ -1,5 +1,4 @@
-﻿using Twilio;
-using Twilio.Types;
+﻿using Twilio.Types;
 using Twilio.Rest.Api.V2010.Account;
 using System.Threading.Tasks;
 using Twilio.Clients;
@@ -8,7 +7,7 @@ namespace LeadAlerts.Web.Domain
 {
     public interface IMessageSender
     {
-        Task<MessageResource> SendAsync(string messageStr); 
+        Task<MessageResource> SendAsync(string message);
     }
 
     public class MessageSender: IMessageSender
