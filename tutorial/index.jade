@@ -53,8 +53,7 @@
 
   .step(
     data-title='Initializing the Twilio REST API Client',
-    data-file='LeadAlerts.Web/Domain/MessageSender.cs'
-    data-highlight='9-12')
+    data-file='LeadAlerts.Web/Domain/NotificationService.cs')
     :markdown
       ## Creating a Twilio REST API Client
 
@@ -70,8 +69,8 @@
 
   .step(
     data-title='Sending the Message',
-    data-file='LeadAlerts.Web/Domain/MessageSender.cs'
-    data-highlight='22-30')
+    data-file='LeadAlerts.Web/Domain/NotificationService.cs'
+    data-highlight='21-30')
     :markdown
       ## Sending the Message
 
@@ -84,12 +83,13 @@
 
   .step(
     data-title='Handling the POST Request', 
-    data-file='LeadAlerts.Web/Controllers/NotificationsController.cs')
+    data-file='LeadAlerts.Web/Controllers/NotificationsController.cs',
+    data-highlight='20-36')
     :markdown
       ## Handling the POST Request
 
       This code handles the HTTP `POST` request issued by our landing page. It
-      uses our `MessageSender` class to send a SMS message to the real estate
+      uses our `NotificationService` class to send a SMS message to the real estate
       agent's phone number, which is also set as a environment variable. We
       include the lead's name, phone number, and inquiry directly in the body of
       the text message we send to the agent.
