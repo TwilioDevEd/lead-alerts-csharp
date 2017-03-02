@@ -2,33 +2,34 @@
 using LeadAlerts.Web.Domain;
 using LeadAlerts.Web.ViewModels;
 using Vereyon.Web;
+using System.Threading.Tasks;
 
 namespace LeadAlerts.Web.Controllers
 {
     public class NotificationsController : Controller
     {
-        private readonly IMessageSender _messageSender;
+        private readonly INotificationService _notificationService;
 
-        public NotificationsController() : this(
-            new MessageSender()) { }
+        public NotificationsController() : this(new NotificationService()) { }
 
-        public NotificationsController(IMessageSender messageSender)
+        public NotificationsController(INotificationService notificationService)
         {
-            _messageSender = messageSender;
+            _notificationService = notificationService;
         }
 
         // POST: Notifications/Create
         [HttpPost]
-        public ActionResult Create(Lead lead)
+        public async Task<ActionResult> Create(Lead lead)
         {
-            var message = _messageSender.Send(FormatMessage(lead));
-            if (message.RestException == null)
+            var message = await _notificationService.SendAsync(FormatMessage(lead));
+
+            if (message.ErrorCode.HasValue)
             {
-                FlashMessage.Confirmation("Thanks! An agent will be contacting you shortly.");
+                FlashMessage.Danger("Oops! There was an error. Please try again.");
             }
             else
             {
-                FlashMessage.Danger("Oops! There was an error. Please try again.");
+                FlashMessage.Confirmation("Thanks! An agent will be contacting you shortly.");
             }
 
             return RedirectToAction("Index", "Home");
@@ -36,9 +37,7 @@ namespace LeadAlerts.Web.Controllers
 
         private static string FormatMessage(Lead lead)
         {
-            return string.Format(
-                "New lead received for {0}. Call {1} at {2}. Message: {3}",
-                lead.HouseTitle, lead.Name, lead.Phone, lead.Message);
+            return $"New lead received for {lead.HouseTitle}. Call {lead.Name} at {lead.Phone}. Message: {lead.Message}";
         }
     }
 }
