@@ -1,4 +1,4 @@
-﻿using Twilio.Types;
+using Twilio.Types;
 using Twilio.Rest.Api.V2010.Account;
 using System.Threading.Tasks;
 using Twilio.Clients;
@@ -20,10 +20,10 @@ namespace LeadAlerts.Web.Domain
 
         public async Task<MessageResource> SendAsync(string message)
         {
-            var to = new PhoneNumber(PhoneNumbers.Twilio);
+            var to = new PhoneNumber(PhoneNumbers.Agent);
             return await MessageResource.CreateAsync(
                 to,
-                from: new PhoneNumber(PhoneNumbers.Agent),
+                from: new PhoneNumber(PhoneNumbers.Twilio),
                 body: message,
                 client: _client
             );
