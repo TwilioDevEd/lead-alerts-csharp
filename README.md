@@ -32,5 +32,6 @@ This demo application shows how to implement instant lead alerts using C# and AS
 ## Meta
 
 * No warranty expressed or implied. Software is as is. Diggity.
+* The CodeExchange repository can be found [here](https://github.com/twilio-labs/code-exchange/).
 * [MIT License](http://www.opensource.org/licenses/mit-license.html)
 * Lovingly crafted by Twilio Developer Education.
