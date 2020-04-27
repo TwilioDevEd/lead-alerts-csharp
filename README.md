@@ -4,6 +4,7 @@
 
 # Instant Lead Alerts for C# and ASP.NET MVC
 
+![](https://github.com/TwilioDevEd/lead-alerts-csharp/workflows/NetFx/badge.svg)
 [![Build status](https://ci.appveyor.com/api/projects/status/7b6v4xetbn0uy6yc/branch/master?svg=true)](https://ci.appveyor.com/project/TwilioDevEd/lead-alerts-csharp/branch/master)
 
 > We are currently in the process of updating this sample template. If you are encountering any issues with the sample, please open an issue at [github.com/twilio-labs/code-exchange/issues](https://github.com/twilio-labs/code-exchange/issues) and we'll try to help you.
