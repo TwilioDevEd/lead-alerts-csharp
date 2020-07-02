@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.Web.LibraryManager.Build.2.1.76\build\Microsoft.Web.LibraryManager.Build.props" Condition="Exists('..\packages\Microsoft.Web.LibraryManager.Build.2.1.76\build\Microsoft.Web.LibraryManager.Build.props')" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -26,6 +27,8 @@
     <Use64BitIISExpress />
     <TypeScriptToolsVersion>3.8</TypeScriptToolsVersion>
     <WebGreaseLibPath>..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -70,6 +73,7 @@
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.Win32.Primitives" />
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -77,13 +81,31 @@
       <HintPath>..\packages\RestSharp.106.10.1\lib\net452\RestSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.AppContext" />
+    <Reference Include="System.Console" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Diagnostics.Tracing" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Globalization.Calendars" />
     <Reference Include="System.IdentityModel.Tokens.Jwt, Version=5.1.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.5.1.2\lib\net451\System.IdentityModel.Tokens.Jwt.dll</HintPath>
     </Reference>
+    <Reference Include="System.IO" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.ZipFile" />
+    <Reference Include="System.IO.FileSystem" />
+    <Reference Include="System.IO.FileSystem.Primitives" />
+    <Reference Include="System.Linq" />
     <Reference Include="System.Net" />
+    <Reference Include="System.Net.Sockets" />
+    <Reference Include="System.Reflection" />
+    <Reference Include="System.Runtime" />
+    <Reference Include="System.Runtime.Extensions" />
+    <Reference Include="System.Runtime.InteropServices" />
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation" />
+    <Reference Include="System.Threading.Thread" />
+    <Reference Include="System.ValueTuple" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -147,132 +169,152 @@
     <Compile Include="ViewModels\Lead.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap-grid.css" />
-    <Content Include="Content\bootstrap-grid.min.css" />
-    <Content Include="Content\bootstrap-reboot.css" />
-    <Content Include="Content\bootstrap-reboot.min.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\font-awesome.css" />
-    <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\Images\house.jpg" />
     <Content Include="favicon.ico" />
-    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Local.config" />
-    <Content Include="fonts\FontAwesome.otf" />
-    <Content Include="fonts\fontawesome-webfont.woff2" />
-    <Content Include="fonts\fontawesome-webfont.woff" />
-    <Content Include="fonts\fontawesome-webfont.ttf" />
-    <Content Include="fonts\fontawesome-webfont.eot" />
-    <Content Include="Scripts\bootstrap.bundle.js" />
-    <Content Include="Scripts\bootstrap.bundle.min.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\bootstrap.min.js.map" />
-    <Content Include="Scripts\bootstrap.js.map" />
-    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
-    <Content Include="Scripts\bootstrap.bundle.js.map" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-reboot.min.css.map" />
-    <Content Include="Content\bootstrap-reboot.css.map" />
-    <Content Include="Content\bootstrap-grid.min.css.map" />
-    <Content Include="Content\bootstrap-grid.css.map" />
-    <Content Include="Scripts\esm\popper-utils.js" />
-    <Content Include="Scripts\esm\popper-utils.min.js" />
-    <Content Include="Scripts\esm\popper.js" />
-    <Content Include="Scripts\esm\popper.min.js" />
-    <Content Include="Scripts\index.js.flow" />
-    <Content Include="Scripts\esm\popper.min.js.map" />
-    <Content Include="Scripts\esm\popper.js.map" />
-    <Content Include="Scripts\esm\popper-utils.min.js.map" />
-    <Content Include="Scripts\esm\popper-utils.js.map" />
-    <None Include="Scripts\jquery-2.1.4.intellisense.js" />
-    <Content Include="Scripts\jquery-2.1.4.js" />
-    <Content Include="Scripts\jquery-2.1.4.min.js" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Scripts\popper-utils.js" />
-    <Content Include="Scripts\popper-utils.min.js" />
-    <Content Include="Scripts\popper.js" />
-    <Content Include="Scripts\popper.min.js" />
-    <Content Include="Scripts\respond.js" />
-    <Content Include="Scripts\respond.matchmedia.addListener.js" />
-    <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
-    <Content Include="Scripts\respond.min.js" />
-    <Content Include="Scripts\src\index.js" />
-    <Content Include="Scripts\src\methods\defaults.js" />
-    <Content Include="Scripts\src\methods\destroy.js" />
-    <Content Include="Scripts\src\methods\disableEventListeners.js" />
-    <Content Include="Scripts\src\methods\enableEventListeners.js" />
-    <Content Include="Scripts\src\methods\placements.js" />
-    <Content Include="Scripts\src\methods\update.js" />
-    <Content Include="Scripts\src\modifiers\applyStyle.js" />
-    <Content Include="Scripts\src\modifiers\arrow.js" />
-    <Content Include="Scripts\src\modifiers\computeStyle.js" />
-    <Content Include="Scripts\src\modifiers\flip.js" />
-    <Content Include="Scripts\src\modifiers\hide.js" />
-    <Content Include="Scripts\src\modifiers\index.js" />
-    <Content Include="Scripts\src\modifiers\inner.js" />
-    <Content Include="Scripts\src\modifiers\keepTogether.js" />
-    <Content Include="Scripts\src\modifiers\offset.js" />
-    <Content Include="Scripts\src\modifiers\preventOverflow.js" />
-    <Content Include="Scripts\src\modifiers\shift.js" />
-    <Content Include="Scripts\src\utils\clockwise.js" />
-    <Content Include="Scripts\src\utils\computeAutoPlacement.js" />
-    <Content Include="Scripts\src\utils\debounce.js" />
-    <Content Include="Scripts\src\utils\find.js" />
-    <Content Include="Scripts\src\utils\findCommonOffsetParent.js" />
-    <Content Include="Scripts\src\utils\findIndex.js" />
-    <Content Include="Scripts\src\utils\getBordersSize.js" />
-    <Content Include="Scripts\src\utils\getBoundaries.js" />
-    <Content Include="Scripts\src\utils\getBoundingClientRect.js" />
-    <Content Include="Scripts\src\utils\getClientRect.js" />
-    <Content Include="Scripts\src\utils\getFixedPositionOffsetParent.js" />
-    <Content Include="Scripts\src\utils\getOffsetParent.js" />
-    <Content Include="Scripts\src\utils\getOffsetRect.js" />
-    <Content Include="Scripts\src\utils\getOffsetRectRelativeToArbitraryNode.js" />
-    <Content Include="Scripts\src\utils\getOppositePlacement.js" />
-    <Content Include="Scripts\src\utils\getOppositeVariation.js" />
-    <Content Include="Scripts\src\utils\getOuterSizes.js" />
-    <Content Include="Scripts\src\utils\getParentNode.js" />
-    <Content Include="Scripts\src\utils\getPopperOffsets.js" />
-    <Content Include="Scripts\src\utils\getReferenceNode.js" />
-    <Content Include="Scripts\src\utils\getReferenceOffsets.js" />
-    <Content Include="Scripts\src\utils\getRoot.js" />
-    <Content Include="Scripts\src\utils\getRoundedOffsets.js" />
-    <Content Include="Scripts\src\utils\getScroll.js" />
-    <Content Include="Scripts\src\utils\getScrollParent.js" />
-    <Content Include="Scripts\src\utils\getStyleComputedProperty.js" />
-    <Content Include="Scripts\src\utils\getSupportedPropertyName.js" />
-    <Content Include="Scripts\src\utils\getViewportOffsetRectRelativeToArtbitraryNode.js" />
-    <Content Include="Scripts\src\utils\getWindow.js" />
-    <Content Include="Scripts\src\utils\getWindowSizes.js" />
-    <Content Include="Scripts\src\utils\includeScroll.js" />
-    <Content Include="Scripts\src\utils\index.js" />
-    <Content Include="Scripts\src\utils\isBrowser.js" />
-    <Content Include="Scripts\src\utils\isFixed.js" />
-    <Content Include="Scripts\src\utils\isFunction.js" />
-    <Content Include="Scripts\src\utils\isIE.js" />
-    <Content Include="Scripts\src\utils\isModifierEnabled.js" />
-    <Content Include="Scripts\src\utils\isModifierRequired.js" />
-    <Content Include="Scripts\src\utils\isNumeric.js" />
-    <Content Include="Scripts\src\utils\isOffsetContainer.js" />
-    <Content Include="Scripts\src\utils\removeEventListeners.js" />
-    <Content Include="Scripts\src\utils\runModifiers.js" />
-    <Content Include="Scripts\src\utils\setAttributes.js" />
-    <Content Include="Scripts\src\utils\setStyles.js" />
-    <Content Include="Scripts\src\utils\setupEventListeners.js" />
-    <Content Include="Scripts\umd\popper-utils.js" />
-    <Content Include="Scripts\umd\popper-utils.min.js" />
-    <Content Include="Scripts\umd\popper.js" />
-    <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="Scripts\lib\css\font-awesome.css" />
+    <Content Include="Scripts\lib\css\font-awesome.min.css" />
+    <Content Include="Scripts\lib\dist\css\bootstrap.css" />
+    <Content Include="Scripts\lib\dist\css\bootstrap.min.css" />
+    <Content Include="Scripts\lib\dist\js\bootstrap.js" />
+    <Content Include="Scripts\lib\dist\js\bootstrap.min.js" />
+    <Content Include="Scripts\lib\fonts\fontawesome-webfont.svg" />
+    <Content Include="Scripts\lib\js\additional-methods.js" />
+    <Content Include="Scripts\lib\js\additional-methods.min.js" />
+    <Content Include="Scripts\lib\js\jquery.js" />
+    <Content Include="Scripts\lib\js\jquery.min.js" />
+    <Content Include="Scripts\lib\js\jquery.validate.js" />
+    <Content Include="Scripts\lib\js\jquery.validate.min.js" />
+    <Content Include="Scripts\lib\js\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\lib\js\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\lib\js\localization\messages_ar.js" />
+    <Content Include="Scripts\lib\js\localization\messages_ar.min.js" />
+    <Content Include="Scripts\lib\js\localization\messages_az.js" />
+    <Content Include="Scripts\lib\js\localization\messages_az.min.js" />
+    <Content Include="Scripts\lib\js\localization\messages_bg.js" />
+    <Content Include="Scripts\lib\js\localization\messages_bg.min.js" />
+    <Content Include="Scripts\lib\js\localization\messages_bn_BD.js" />
+    <Content Include="Scripts\lib\js\localization\messages_bn_BD.min.js" />
+    <Content Include="Scripts\lib\js\localization\messages_ca.js" />
+    <Content Include="Scripts\lib\js\localization\messages_ca.min.js" />
+    <Content Include="Scripts\lib\js\localization\messages_cs.js" />
+    <Content Include="Scripts\lib\js\localization\messages_cs.min.js" />
+    <Content Include="Scripts\lib\js\localization\messages_da.js" />
+    <Content Include="Scripts\lib\js\localization\messages_da.min.js" />
+    <Content Include="Scripts\lib\js\localization\messages_de.js" />
+    <Content Include="Scripts\lib\js\localization\messages_de.min.js" />
+    <Content Include="Scripts\lib\js\localization\messages_el.js" />
+    <Content Include="Scripts\lib\js\localization\messages_el.min.js" />
+    <Content Include="Scripts\lib\js\localization\messages_es.js" />
+    <Content Include="Scripts\lib\js\localization\messages_es.min.js" />
+    <Content Include="Scripts\lib\js\localization\messages_es_AR.js" />
+    <Content Include="Scripts\lib\js\localization\messages_es_AR.min.js" />
+    <Content Include="Scripts\lib\js\localization\messages_es_PE.js" />
+    <Content Include="Scripts\lib\js\localization\messages_es_PE.min.js" />
+    <Content Include="Scripts\lib\js\localization\messages_et.js" />
+    <Content Include="Scripts\lib\js\localization\messages_et.min.js" />
+    <Content Include="Scripts\lib\js\localization\messages_eu.js" />
+    <Content Include="Scripts\lib\js\localization\messages_eu.min.js" />
+    <Content Include="Scripts\lib\js\localization\messages_fa.js" />
+    <Content Include="Scripts\lib\js\localization\messages_fa.min.js" />
+    <Content Include="Scripts\lib\js\localization\messages_fi.js" />
+    <Content Include="Scripts\lib\js\localization\messages_fi.min.js" />
+    <Content Include="Scripts\lib\js\localization\messages_fr.js" />
+    <Content Include="Scripts\lib\js\localization\messages_fr.min.js" />
+    <Content Include="Scripts\lib\js\localization\messages_ge.js" />
+    <Content Include="Scripts\lib\js\localization\messages_ge.min.js" />
+    <Content Include="Scripts\lib\js\localization\messages_gl.js" />
+    <Content Include="Scripts\lib\js\localization\messages_gl.min.js" />
+    <Content Include="Scripts\lib\js\localization\messages_he.js" />
+    <Content Include="Scripts\lib\js\localization\messages_he.min.js" />
+    <Content Include="Scripts\lib\js\localization\messages_hr.js" />
+    <Content Include="Scripts\lib\js\localization\messages_hr.min.js" />
+    <Content Include="Scripts\lib\js\localization\messages_hu.js" />
+    <Content Include="Scripts\lib\js\localization\messages_hu.min.js" />
+    <Content Include="Scripts\lib\js\localization\messages_hy_AM.js" />
+    <Content Include="Scripts\lib\js\localization\messages_hy_AM.min.js" />
+    <Content Include="Scripts\lib\js\localization\messages_id.js" />
+    <Content Include="Scripts\lib\js\localization\messages_id.min.js" />
+    <Content Include="Scripts\lib\js\localization\messages_is.js" />
+    <Content Include="Scripts\lib\js\localization\messages_is.min.js" />
+    <Content Include="Scripts\lib\js\localization\messages_it.js" />
+    <Content Include="Scripts\lib\js\localization\messages_it.min.js" />
+    <Content Include="Scripts\lib\js\localization\messages_ja.js" />
+    <Content Include="Scripts\lib\js\localization\messages_ja.min.js" />
+    <Content Include="Scripts\lib\js\localization\messages_ka.js" />
+    <Content Include="Scripts\lib\js\localization\messages_ka.min.js" />
+    <Content Include="Scripts\lib\js\localization\messages_kk.js" />
+    <Content Include="Scripts\lib\js\localization\messages_kk.min.js" />
+    <Content Include="Scripts\lib\js\localization\messages_ko.js" />
+    <Content Include="Scripts\lib\js\localization\messages_ko.min.js" />
+    <Content Include="Scripts\lib\js\localization\messages_lt.js" />
+    <Content Include="Scripts\lib\js\localization\messages_lt.min.js" />
+    <Content Include="Scripts\lib\js\localization\messages_lv.js" />
+    <Content Include="Scripts\lib\js\localization\messages_lv.min.js" />
+    <Content Include="Scripts\lib\js\localization\messages_mk.js" />
+    <Content Include="Scripts\lib\js\localization\messages_mk.min.js" />
+    <Content Include="Scripts\lib\js\localization\messages_my.js" />
+    <Content Include="Scripts\lib\js\localization\messages_my.min.js" />
+    <Content Include="Scripts\lib\js\localization\messages_nl.js" />
+    <Content Include="Scripts\lib\js\localization\messages_nl.min.js" />
+    <Content Include="Scripts\lib\js\localization\messages_no.js" />
+    <Content Include="Scripts\lib\js\localization\messages_no.min.js" />
+    <Content Include="Scripts\lib\js\localization\messages_pl.js" />
+    <Content Include="Scripts\lib\js\localization\messages_pl.min.js" />
+    <Content Include="Scripts\lib\js\localization\messages_pt_BR.js" />
+    <Content Include="Scripts\lib\js\localization\messages_pt_BR.min.js" />
+    <Content Include="Scripts\lib\js\localization\messages_pt_PT.js" />
+    <Content Include="Scripts\lib\js\localization\messages_pt_PT.min.js" />
+    <Content Include="Scripts\lib\js\localization\messages_ro.js" />
+    <Content Include="Scripts\lib\js\localization\messages_ro.min.js" />
+    <Content Include="Scripts\lib\js\localization\messages_ru.js" />
+    <Content Include="Scripts\lib\js\localization\messages_ru.min.js" />
+    <Content Include="Scripts\lib\js\localization\messages_sd.js" />
+    <Content Include="Scripts\lib\js\localization\messages_sd.min.js" />
+    <Content Include="Scripts\lib\js\localization\messages_si.js" />
+    <Content Include="Scripts\lib\js\localization\messages_si.min.js" />
+    <Content Include="Scripts\lib\js\localization\messages_sk.js" />
+    <Content Include="Scripts\lib\js\localization\messages_sk.min.js" />
+    <Content Include="Scripts\lib\js\localization\messages_sl.js" />
+    <Content Include="Scripts\lib\js\localization\messages_sl.min.js" />
+    <Content Include="Scripts\lib\js\localization\messages_sr.js" />
+    <Content Include="Scripts\lib\js\localization\messages_sr.min.js" />
+    <Content Include="Scripts\lib\js\localization\messages_sr_lat.js" />
+    <Content Include="Scripts\lib\js\localization\messages_sr_lat.min.js" />
+    <Content Include="Scripts\lib\js\localization\messages_sv.js" />
+    <Content Include="Scripts\lib\js\localization\messages_sv.min.js" />
+    <Content Include="Scripts\lib\js\localization\messages_th.js" />
+    <Content Include="Scripts\lib\js\localization\messages_th.min.js" />
+    <Content Include="Scripts\lib\js\localization\messages_tj.js" />
+    <Content Include="Scripts\lib\js\localization\messages_tj.min.js" />
+    <Content Include="Scripts\lib\js\localization\messages_tr.js" />
+    <Content Include="Scripts\lib\js\localization\messages_tr.min.js" />
+    <Content Include="Scripts\lib\js\localization\messages_uk.js" />
+    <Content Include="Scripts\lib\js\localization\messages_uk.min.js" />
+    <Content Include="Scripts\lib\js\localization\messages_ur.js" />
+    <Content Include="Scripts\lib\js\localization\messages_ur.min.js" />
+    <Content Include="Scripts\lib\js\localization\messages_vi.js" />
+    <Content Include="Scripts\lib\js\localization\messages_vi.min.js" />
+    <Content Include="Scripts\lib\js\localization\messages_zh.js" />
+    <Content Include="Scripts\lib\js\localization\messages_zh.min.js" />
+    <Content Include="Scripts\lib\js\localization\messages_zh_TW.js" />
+    <Content Include="Scripts\lib\js\localization\messages_zh_TW.min.js" />
+    <Content Include="Scripts\lib\js\localization\methods_de.js" />
+    <Content Include="Scripts\lib\js\localization\methods_de.min.js" />
+    <Content Include="Scripts\lib\js\localization\methods_es_CL.js" />
+    <Content Include="Scripts\lib\js\localization\methods_es_CL.min.js" />
+    <Content Include="Scripts\lib\js\localization\methods_fi.js" />
+    <Content Include="Scripts\lib\js\localization\methods_fi.min.js" />
+    <Content Include="Scripts\lib\js\localization\methods_it.js" />
+    <Content Include="Scripts\lib\js\localization\methods_it.min.js" />
+    <Content Include="Scripts\lib\js\localization\methods_nl.js" />
+    <Content Include="Scripts\lib\js\localization\methods_nl.min.js" />
+    <Content Include="Scripts\lib\js\localization\methods_pt.js" />
+    <Content Include="Scripts\lib\js\localization\methods_pt.min.js" />
+    <Content Include="Scripts\lib\js\modernizr.js" />
+    <Content Include="Scripts\lib\js\modernizr.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -286,16 +328,6 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Scripts\umd\popper.min.js.map" />
-    <Content Include="Scripts\umd\popper.js.map" />
-    <Content Include="Scripts\umd\popper.js.flow" />
-    <Content Include="Scripts\umd\popper-utils.min.js.map" />
-    <Content Include="Scripts\umd\popper-utils.js.map" />
-    <Content Include="Scripts\README.md" />
-    <Content Include="Scripts\popper.min.js.map" />
-    <Content Include="Scripts\popper.js.map" />
-    <Content Include="Scripts\popper-utils.min.js.map" />
-    <Content Include="Scripts\popper-utils.js.map" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -305,13 +337,23 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Scripts\jquery-2.1.4.min.map" />
-  </ItemGroup>
-  <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="Scripts\index.d.ts" />
+    <Content Include="libman.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\lib\dist\css\bootstrap.css.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\lib\fonts\fontawesome-webfont.eot" />
+    <Content Include="Scripts\lib\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Scripts\lib\fonts\fontawesome-webfont.woff" />
+    <Content Include="Scripts\lib\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Scripts\lib\fonts\FontAwesome.otf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\lib\css\font-awesome.css.map" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -342,6 +384,14 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Web.LibraryManager.Build.2.1.76\build\Microsoft.Web.LibraryManager.Build.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Web.LibraryManager.Build.2.1.76\build\Microsoft.Web.LibraryManager.Build.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Web.LibraryManager.Build.2.1.76\build\Microsoft.Web.LibraryManager.Build.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Web.LibraryManager.Build.2.1.76\build\Microsoft.Web.LibraryManager.Build.targets'))" />
+  </Target>
+  <Import Project="..\packages\Microsoft.Web.LibraryManager.Build.2.1.76\build\Microsoft.Web.LibraryManager.Build.targets" Condition="Exists('..\packages\Microsoft.Web.LibraryManager.Build.2.1.76\build\Microsoft.Web.LibraryManager.Build.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

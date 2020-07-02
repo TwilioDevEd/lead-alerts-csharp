@@ -2,7 +2,6 @@ using Twilio.Types;
 using Twilio.Rest.Api.V2010.Account;
 using System.Threading.Tasks;
 using Twilio.Clients;
-using System.Net;
 
 namespace LeadAlerts.Web.Domain
 {
@@ -21,13 +20,8 @@ namespace LeadAlerts.Web.Domain
 
         public async Task<MessageResource> SendAsync(string message)
         {
-            var to = new PhoneNumber(PhoneNumbers.Agent);
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls
-                                                    | SecurityProtocolType.Tls11
-                                                    | SecurityProtocolType.Tls12
-                                                    | SecurityProtocolType.Ssl3;
             return await MessageResource.CreateAsync(
-                to,
+                to: new PhoneNumber(PhoneNumbers.Agent),
                 from: new PhoneNumber(PhoneNumbers.Twilio),
                 body: message,
                 client: _client

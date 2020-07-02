@@ -4,7 +4,7 @@
     <div class="col-sm-8">
         <h1>@ViewBag.Title</h1>
         <h3>@ViewBag.Price</h3>
-        <img src="~/Content/Images/house.jpg" alt="House" />
+        <img src="~/Content/Images/house.jpg" class="img-responsive" alt="House" />
         <p>@ViewBag.Description</p>
     </div>
     <div class="col-sm-2 demo">
@@ -19,15 +19,15 @@
             @Html.HiddenFor(m => m.HouseTitle)
             <div class="form-group">
                 @Html.LabelFor(m => m.Name)
-                @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = "John Appleseed" })
+                @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = "John Appleseed", required = "required" })
             </div>
             <div class="form-group">
                 @Html.LabelFor(m => m.Phone)
-                @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", placeholder = "+16512229988" })
+                @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", placeholder = "+16512229988", required = "required" })
             </div>
             <div class="form-group">
                 @Html.LabelFor(m => m.Message)
-                @Html.TextBoxFor(m => m.Message, new { @class = "form-control" })
+                @Html.TextBoxFor(m => m.Message, new { @class = "form-control", required = "required" })
             </div>
             <button type="submit" class="btn btn-primary">Request Info</button>
         }
