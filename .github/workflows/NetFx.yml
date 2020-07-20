@@ -1,0 +1,33 @@
+name: NetFx
+
+on:
+  push:
+    branches: [ master, next ]
+  pull_request:
+    branches: [ master, next ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      name: Checkout Code
+
+    - name: Setup MSBuild Path
+      uses: microsoft/setup-msbuild@v1
+
+    - name: Setup NuGet
+      uses: NuGet/setup-nuget@v1.0.2
+
+    - name: Restore NuGet Packages
+      run: nuget restore LeadAlerts.sln
+
+    - name: Set up local configuration
+      run: copy "LeadAlerts.Web\Local.config.example" "LeadAlerts.Web\Local.config"
+
+    - name: Build Web App
+      run: msbuild LeadAlerts.sln /verbosity:minimal
+
+    - name: Run Tests with NUnit Console
+      run: .\packages\NUnit.ConsoleRunner.3.11.1\tools\nunit3-console LeadAlerts.Web.Tests\bin\Debug\LeadAlerts.Web.Tests.dll

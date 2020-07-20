@@ -20,9 +20,8 @@ namespace LeadAlerts.Web.Domain
 
         public async Task<MessageResource> SendAsync(string message)
         {
-            var to = new PhoneNumber(PhoneNumbers.Agent);
             return await MessageResource.CreateAsync(
-                to,
+                to: new PhoneNumber(PhoneNumbers.Agent),
                 from: new PhoneNumber(PhoneNumbers.Twilio),
                 body: message,
                 client: _client
